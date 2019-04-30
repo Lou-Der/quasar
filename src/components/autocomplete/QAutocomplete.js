@@ -138,10 +138,6 @@ export default {
         ? this.$refs.popover.hide()
         : Promise.resolve()
     },
-    blurHide () {
-      this.__clearSearch()
-      this.timer = setTimeout(() => this.hide(), 300)
-    },
     __clearSearch () {
       clearTimeout(this.timer)
       this.__input.loading = false
@@ -228,7 +224,6 @@ export default {
       if (this.__input) {
         this.inputEl = this.__input.getEl()
         this.inputEl.addEventListener('keydown', this.__keyboardHandleKey)
-        this.inputEl.addEventListener('blur', this.blurHide)
         this.inputEl.addEventListener('focus', this.__focusShowTrigger)
       }
     })
@@ -241,7 +236,6 @@ export default {
     }
     if (this.inputEl) {
       this.inputEl.removeEventListener('keydown', this.__keyboardHandleKey)
-      this.inputEl.removeEventListener('blur', this.blurHide)
       this.inputEl.removeEventListener('focus', this.__focusShowTrigger)
       this.hide()
     }
